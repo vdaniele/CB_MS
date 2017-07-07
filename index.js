@@ -41,3 +41,22 @@ session.endDialogWithResult(results);
 }
 ]);
 
+let address;
+function sendProactiveMessage(address) {
+	var msg = new builder.Message().address(address);
+	msg.text('Hello, this is a notification');
+	msg.textLocale('en-US');
+	bot.send(msg);
+}
+
+//Dialog handling
+bot.dialog8'/', function(session) {
+	address = session.message.address;
+	session.send('Hi');
+	setTimeout(() => {
+		sendProactiveMessage(address);
+	}, 5000);
+});
+
+	
+
